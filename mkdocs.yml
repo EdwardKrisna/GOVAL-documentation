@@ -1,8 +1,8 @@
 site_name: GOVAL Documentation
 site_description: Geospatial Optimization & Validation Analytics Library for Indonesian Metropolitan Areas
 site_author: GOVAL Team
-repo_url: https://github.com/yourusername/GOVAL
-repo_name: yourusername/GOVAL
+repo_url: https://edwardkrisna.github.io/GOVAL-documentation
+repo_name: edwardkrisna/GOVAL-documentation
 
 theme:
   name: material
