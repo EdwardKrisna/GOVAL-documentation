@@ -24,6 +24,7 @@ This is the main property observation dataset containing all property characteri
 ### Required Columns (20 total)
 
 #### Spatial Coordinates (2 columns)
+
 | Column | Type | Description | Example |
 |--------|------|-------------|---------|
 | `latitude` | Float | Latitude coordinate in decimal degrees (WGS84) | -6.2184799 |
@@ -37,6 +38,7 @@ This is the main property observation dataset containing all property characteri
 ---
 
 #### Property Characteristics (6 columns)
+
 | Column | Type | Description | Valid Range |
 |--------|------|-------------|-------------|
 | `luas_tanah` | Float | Land area in square meters | 30 - 10,000 m² |
@@ -62,6 +64,7 @@ This is the main property observation dataset containing all property characteri
 ---
 
 #### Pricing & Transaction (5 columns)
+
 | Column | Type | Description | Valid Range |
 |--------|------|-------------|-------------|
 | `harga_penawaran` | Float | Asking price (IDR) | > 0 |
@@ -84,6 +87,7 @@ This is the main property observation dataset containing all property characteri
 ---
 
 #### Land-use & Classification (3 columns)
+
 | Column | Type | Description | Valid Values |
 |--------|------|-------------|--------------|
 | `kondisi_wilayah_sekitar` | String | Surrounding area condition/context | See reclassification mapping |
@@ -106,6 +110,7 @@ This is the main property observation dataset containing all property characteri
 ---
 
 #### Administrative (3 columns)
+
 | Column | Type | Description | Example |
 |--------|------|-------------|---------|
 | `wadmkk` | String | City/Municipality (Kabupaten/Kota) | "Kota Administrasi Jakarta Selatan" |
@@ -119,6 +124,7 @@ This is the main property observation dataset containing all property characteri
 ---
 
 #### Temporal & Identifier (2 columns)
+
 | Column | Type | Description | Valid Range |
 |--------|------|-------------|-------------|
 | `tahun_pengambilan_data` | Integer | Year of data collection | 2017 - 2025 |
