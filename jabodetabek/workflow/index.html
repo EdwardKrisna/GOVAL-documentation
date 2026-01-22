@@ -1,0 +1,4203 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Geospatial Optimization & Validation Analytics Library for Indonesian Metropolitan Areas">
+      
+      
+        <meta name="author" content="GOVAL Team">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../features/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Workflow Guide - GOVAL Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#feature-engineering-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="GOVAL Documentation" class="md-header__button md-logo" aria-label="GOVAL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GOVAL Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Workflow Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yourusername/GOVAL" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yourusername/GOVAL
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Jabodetabek Property Valuation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../coming-soon/" class="md-tabs__link">
+          
+  
+  
+  Future Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="GOVAL Documentation" class="md-nav__button md-logo" aria-label="GOVAL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GOVAL Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yourusername/GOVAL" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yourusername/GOVAL
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jabodetabek Property Valuation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Jabodetabek Property Valuation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data-loading-spatial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Data Loading &amp; Spatial Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Data Loading &amp; Spatial Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-preprocessing-target-variable-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Data Preprocessing &amp; Target Variable Completion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data Preprocessing &amp; Target Variable Completion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-compute-missing-hpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Compute Missing HPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rule-based-filtering-outlier-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Rule-based Filtering (Outlier Control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crs-reprojection-for-metric-distance-calculations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. CRS Reprojection for Metric Distance Calculations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. CRS Reprojection for Metric Distance Calculations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crs-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRS Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-spatial-distance-feature-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Spatial Distance Feature Engineering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Spatial Distance Feature Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-spatial-zone-marking-binary-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Spatial Zone Marking (Binary Features)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Spatial Zone Marking (Binary Features)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-premium-zone-flags-polygon-intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Premium Zone Flags (Polygon Intersection)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Premium Zone Flags (Polygon Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-most-premium-core-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Most premium core areas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-secondary-premium-areas-excluding-pik-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Secondary premium areas (excluding PIK group)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pik-specific-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. PIK specific flag
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-rural-flag-spatial-join-within" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Rural Flag (Spatial Join "Within")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-additional-data-cleaning-de-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Additional Data Cleaning &amp; De-duplication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Additional Data Cleaning &amp; De-duplication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#61-remove-missing-critical-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Remove Missing Critical Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-remove-wrong-coordinate-cluster-buffer-exclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Remove Wrong-Coordinate Cluster (Buffer Exclusion)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-de-duplicate-by-latlong-keeping-newest-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 De-duplicate by Lat/Long Keeping Newest Observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-accessibility-feature-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Accessibility Feature Engineering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Accessibility Feature Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#71-shape-factor-definition-heuristic-geometry-adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Shape Factor Definition (Heuristic Geometry Adjustment)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-numeric-coercion-and-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Numeric Coercion and Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-intermediate-geometry-proxy-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Intermediate Geometry Proxy Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Intermediate Geometry Proxy Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqrt_luas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sqrt_luas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratio_luas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ratio_luas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratio_sisi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ratio_sisi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-compute-sisi-effective-side-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Compute "Sisi" (Effective Side Length)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-accessibility-decision-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Accessibility Decision Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 Accessibility Decision Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jarak_sisi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        jarak_sisi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_accessible-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_accessible (0/1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-land-use-area-reclassification-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Land-use / Area Reclassification Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Land-use / Area Reclassification Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#81-reclassify-kondisi_wilayah_sekitar-into-standard-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Reclassify "kondisi_wilayah_sekitar" into Standard Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-filter-invalid-empty-prediction-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Filter Invalid Empty Prediction Label
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-commercial-influence-zone-derived-from-road-width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Commercial Influence Zone (Derived from Road Width)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 Commercial Influence Zone (Derived from Road Width)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rad_komersial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rad_komersial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#area_komersial-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        area_komersial (0/1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-final-rule-based-reclassification-multi-source-reconciliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Final Rule-based Reclassification (Multi-source Reconciliation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-encode-to-numeric-land-use-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Encode to Numeric Land-use Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parcel-position-scoring-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parcel Position Scoring Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parcel Position Scoring Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#91-define-scoring-rules-by-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Define Scoring Rules by Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-apply-to-dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Apply to Dataframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-ownership-certificate-adjustment-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Ownership / Certificate Adjustment Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Ownership / Certificate Adjustment Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#101-normalize-text-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Normalize Text Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-create-adjusted-price-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Create Adjusted Price Metric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-define-land-use-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Define Land-use Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-define-ownership-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Define Ownership Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-apply-rule-based-multipliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Apply Rule-based Multipliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parcel-shape-scoring-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parcel Shape Scoring Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Parcel Shape Scoring Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111-scoring-matrix-by-land-use-and-size-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Scoring Matrix by Land-use and Size Bucket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-scoring-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Scoring Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-apply-to-dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Apply to Dataframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-economic-index-feature-pdrb-adhb-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Economic Index Feature (PDRB ADHB Normalization)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Economic Index Feature (PDRB ADHB Normalization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-build-pdrb-index-base-year-2010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Build PDRB Index (Base Year = 2010)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-map-city-label-to-correct-index-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Map City Label to Correct Index Column
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-assign-index-to-each-row" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Assign Index to Each Row
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-log-transform-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Log Transform Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Log Transform Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-log-transform-distance-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Log-transform Distance Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-log-transform-core-continuous-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Log-transform Core Continuous Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-outlier-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Outlier Removal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Outlier Removal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-manual-outlier-exclusion-by-object-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Manual Outlier Exclusion by Object ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-checkpoint-dataset-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Checkpoint Dataset Creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-define-grouping-key-district-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Define Grouping Key (District × Class)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 Define Grouping Key (District × Class)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wadmkd_agga_score_hyb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wadmkd_agga_score_hyb
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object_id_hyb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        object_id_hyb
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-quantile-fence-filtering-within-each-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Quantile Fence Filtering Within Each Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-annotate-and-remove-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 Annotate and Remove Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-final-feature-generation-for-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Final Feature Generation for Modeling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Final Feature Generation for Modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#151-accessibility-adjusted-road-width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Accessibility-adjusted Road Width
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-city-dummy-variables-jakarta-admin-bekasi-city" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 City Dummy Variables (Jakarta Admin + Bekasi City)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-normalize-reclass-labels-into-short-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Normalize Reclass Labels into Short Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-one-hot-style-land-use-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 One-hot Style Land-use Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-commercial-area-split-jakarta-vs-non-jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Commercial Area Split: Jakarta vs Non-Jakarta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.5 Commercial Area Split: Jakarta vs Non-Jakarta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is_komersial_jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_komersial_jakarta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_komersial_non_jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_komersial_non_jakarta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-deliverable-of-feature-engineering-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Deliverable of Feature Engineering Stage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final Deliverable of Feature Engineering Stage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#macro-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Macro Feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outlier-control-outputs-optional-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outlier Control Outputs (Optional Diagnostics)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-ready-engineered-predictors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model-ready Engineered Predictors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features & Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Future Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Future Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coming-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bandung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coming-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bandung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data-loading-spatial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Data Loading &amp; Spatial Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Data Loading &amp; Spatial Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-preprocessing-target-variable-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Data Preprocessing &amp; Target Variable Completion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data Preprocessing &amp; Target Variable Completion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-compute-missing-hpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Compute Missing HPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rule-based-filtering-outlier-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Rule-based Filtering (Outlier Control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crs-reprojection-for-metric-distance-calculations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. CRS Reprojection for Metric Distance Calculations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. CRS Reprojection for Metric Distance Calculations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crs-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRS Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-spatial-distance-feature-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Spatial Distance Feature Engineering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Spatial Distance Feature Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-spatial-zone-marking-binary-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Spatial Zone Marking (Binary Features)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Spatial Zone Marking (Binary Features)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-premium-zone-flags-polygon-intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Premium Zone Flags (Polygon Intersection)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Premium Zone Flags (Polygon Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-most-premium-core-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Most premium core areas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-secondary-premium-areas-excluding-pik-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Secondary premium areas (excluding PIK group)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pik-specific-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. PIK specific flag
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-rural-flag-spatial-join-within" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Rural Flag (Spatial Join "Within")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-additional-data-cleaning-de-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Additional Data Cleaning &amp; De-duplication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Additional Data Cleaning &amp; De-duplication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#61-remove-missing-critical-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Remove Missing Critical Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-remove-wrong-coordinate-cluster-buffer-exclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Remove Wrong-Coordinate Cluster (Buffer Exclusion)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-de-duplicate-by-latlong-keeping-newest-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 De-duplicate by Lat/Long Keeping Newest Observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-accessibility-feature-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Accessibility Feature Engineering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Accessibility Feature Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#71-shape-factor-definition-heuristic-geometry-adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Shape Factor Definition (Heuristic Geometry Adjustment)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-numeric-coercion-and-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Numeric Coercion and Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-intermediate-geometry-proxy-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Intermediate Geometry Proxy Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Intermediate Geometry Proxy Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqrt_luas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sqrt_luas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratio_luas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ratio_luas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratio_sisi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ratio_sisi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-compute-sisi-effective-side-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Compute "Sisi" (Effective Side Length)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-accessibility-decision-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Accessibility Decision Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 Accessibility Decision Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jarak_sisi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        jarak_sisi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_accessible-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_accessible (0/1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-land-use-area-reclassification-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Land-use / Area Reclassification Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Land-use / Area Reclassification Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#81-reclassify-kondisi_wilayah_sekitar-into-standard-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Reclassify "kondisi_wilayah_sekitar" into Standard Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-filter-invalid-empty-prediction-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Filter Invalid Empty Prediction Label
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-commercial-influence-zone-derived-from-road-width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Commercial Influence Zone (Derived from Road Width)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 Commercial Influence Zone (Derived from Road Width)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rad_komersial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rad_komersial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#area_komersial-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        area_komersial (0/1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-final-rule-based-reclassification-multi-source-reconciliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Final Rule-based Reclassification (Multi-source Reconciliation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-encode-to-numeric-land-use-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Encode to Numeric Land-use Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parcel-position-scoring-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parcel Position Scoring Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parcel Position Scoring Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#91-define-scoring-rules-by-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Define Scoring Rules by Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-apply-to-dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Apply to Dataframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-ownership-certificate-adjustment-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Ownership / Certificate Adjustment Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Ownership / Certificate Adjustment Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#101-normalize-text-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Normalize Text Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-create-adjusted-price-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Create Adjusted Price Metric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-define-land-use-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Define Land-use Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-define-ownership-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Define Ownership Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-apply-rule-based-multipliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Apply Rule-based Multipliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parcel-shape-scoring-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parcel Shape Scoring Feature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Parcel Shape Scoring Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111-scoring-matrix-by-land-use-and-size-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Scoring Matrix by Land-use and Size Bucket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-scoring-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Scoring Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-apply-to-dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Apply to Dataframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-economic-index-feature-pdrb-adhb-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Economic Index Feature (PDRB ADHB Normalization)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Economic Index Feature (PDRB ADHB Normalization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#121-build-pdrb-index-base-year-2010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Build PDRB Index (Base Year = 2010)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-map-city-label-to-correct-index-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Map City Label to Correct Index Column
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-assign-index-to-each-row" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Assign Index to Each Row
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-log-transform-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Log Transform Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Log Transform Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131-log-transform-distance-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Log-transform Distance Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-log-transform-core-continuous-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Log-transform Core Continuous Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-outlier-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Outlier Removal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Outlier Removal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141-manual-outlier-exclusion-by-object-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Manual Outlier Exclusion by Object ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-checkpoint-dataset-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Checkpoint Dataset Creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-define-grouping-key-district-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Define Grouping Key (District × Class)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 Define Grouping Key (District × Class)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wadmkd_agga_score_hyb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wadmkd_agga_score_hyb
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object_id_hyb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        object_id_hyb
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-quantile-fence-filtering-within-each-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Quantile Fence Filtering Within Each Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145-annotate-and-remove-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 Annotate and Remove Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-final-feature-generation-for-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Final Feature Generation for Modeling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Final Feature Generation for Modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#151-accessibility-adjusted-road-width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Accessibility-adjusted Road Width
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-city-dummy-variables-jakarta-admin-bekasi-city" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 City Dummy Variables (Jakarta Admin + Bekasi City)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-normalize-reclass-labels-into-short-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Normalize Reclass Labels into Short Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-one-hot-style-land-use-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 One-hot Style Land-use Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-commercial-area-split-jakarta-vs-non-jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Commercial Area Split: Jakarta vs Non-Jakarta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.5 Commercial Area Split: Jakarta vs Non-Jakarta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is_komersial_jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_komersial_jakarta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_komersial_non_jakarta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_komersial_non_jakarta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-deliverable-of-feature-engineering-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Deliverable of Feature Engineering Stage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final Deliverable of Feature Engineering Stage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#macro-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Macro Feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outlier-control-outputs-optional-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outlier Control Outputs (Optional Diagnostics)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-ready-engineered-predictors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model-ready Engineered Predictors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="feature-engineering-workflow">Feature Engineering Workflow</h1>
+<p>Complete step-by-step documentation of the Jabodetabek Property Valuation v4 feature engineering pipeline.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-data-loading--spatial-setup">Data Loading &amp; Spatial Setup</a></li>
+<li><a href="#2-data-preprocessing--target-variable-completion">Data Preprocessing &amp; Target Variable</a></li>
+<li><a href="#3-crs-reprojection-for-metric-distance-calculations">CRS Reprojection</a></li>
+<li><a href="#4-spatial-distance-feature-engineering">Spatial Distance Features</a></li>
+<li><a href="#5-spatial-zone-marking-binary-features">Spatial Zone Marking</a></li>
+<li><a href="#6-additional-data-cleaning--de-duplication">Additional Data Cleaning</a></li>
+<li><a href="#7-accessibility-feature-engineering">Accessibility Feature Engineering</a></li>
+<li><a href="#8-land-use--area-reclassification-logic">Land-use Reclassification</a></li>
+<li><a href="#9-parcel-position-scoring-feature">Parcel Position Scoring</a></li>
+<li><a href="#10-ownership--certificate-adjustment-feature">Ownership Adjustment</a></li>
+<li><a href="#11-parcel-shape-scoring-feature">Parcel Shape Scoring</a></li>
+<li><a href="#12-economic-index-feature-pdrb-adhb-normalization">Economic Index Feature</a></li>
+<li><a href="#13-log-transform-features">Log Transform Features</a></li>
+<li><a href="#14-outlier-removal">Outlier Removal</a></li>
+<li><a href="#15-final-feature-generation-for-modeling">Final Feature Generation</a></li>
+</ol>
+<hr />
+<h2 id="1-data-loading-spatial-setup">1. Data Loading &amp; Spatial Setup</h2>
+<h3 id="objective">Objective</h3>
+<p>Load raw tabular dataset and convert it into spatial point data for geospatial feature generation.</p>
+<h3 id="inputs">Inputs</h3>
+<ul>
+<li><strong>Raw dataset</strong>: <code>jbdtb_100_1.xlsx</code></li>
+<li><strong>Road network</strong> (GeoDataFrame): <code>road</code></li>
+<li><strong>Administrative/zone polygons</strong>:</li>
+<li>Premium marking polygons: <code>mark_4.geojson</code></li>
+<li>Rural polygons: <code>rural_2.geojson</code></li>
+<li><strong>Macro data</strong>: PDRB table: <code>pdrb_adhk (1).xlsx</code> (sheet: <code>adhb</code>)</li>
+<li><strong>Reference POIs</strong> (constructed manually):</li>
+<li>Big city center points (example: BEJ)</li>
+<li>Small city/activity center points (malls, stadium, botanical garden, etc.)</li>
+</ul>
+<h3 id="process">Process</h3>
+<ol>
+<li>Read Excel and convert to GeoDataFrame using longitude and latitude with CRS EPSG:4326</li>
+<li>Create a subset of roads <code>main_road_jabodetabek</code> based on major road classes:</li>
+<li><code>primary</code>, <code>secondary</code>, <code>motorway</code>, <code>trunk</code> + their <code>_link</code> variants</li>
+<li>Load polygon layers (<code>mark</code>, <code>rural</code>) and ensure CRS is consistent for spatial operations</li>
+</ol>
+<h3 id="output">Output</h3>
+<ul>
+<li><code>df</code> as point GeoDataFrame (initially EPSG:4326)</li>
+<li><code>main_road_jabodetabek</code> as filtered road GeoDataFrame</li>
+<li>POI GeoDataFrames: <code>bc_new_gdf</code> and <code>sc_new_gdf</code></li>
+</ul>
+<hr />
+<h2 id="2-data-preprocessing-target-variable-completion">2. Data Preprocessing &amp; Target Variable Completion</h2>
+<h3 id="objective_1">Objective</h3>
+<p>Ensure essential numeric variable <code>hpm</code> (harga per meter) exists and remove invalid/outlier records.</p>
+<h3 id="21-compute-missing-hpm">2.1 Compute Missing HPM</h3>
+<p><strong>Feature created</strong>: <code>hpm</code></p>
+<p><strong>Logic</strong>:</p>
+<p>Discounted price:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>harga_setelah_diskon = harga_penawaran × (1 - diskon/100)
+</code></pre></div></p>
+<p>If <code>jenis_objek == 1</code> (land):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>hpm = harga_setelah_diskon / luas_tanah
+</code></pre></div></p>
+<p>If <code>jenis_objek == 2</code> (land + building):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hpm = (harga_setelah_diskon - kemungkinan_transaksi_bangunan) / luas_tanah
+</code></pre></div></p>
+<p><strong>Guardrails</strong>:
+- If <code>luas_tanah ≤ 0</code> → NaN</p>
+<p><strong>Cleaning action</strong>:
+- Fill <code>hpm</code> only for rows where it is missing
+- Drop rows where <code>hpm</code> remains NaN</p>
+<h3 id="22-rule-based-filtering-outlier-control">2.2 Rule-based Filtering (Outlier Control)</h3>
+<p><strong>Objective</strong>: Keep records within realistic ranges.</p>
+<p><strong>Filters applied</strong>:
+- <code>100,000 ≤ hpm ≤ 100,000,000</code>
+- <code>30 ≤ luas_tanah ≤ 10,000</code>
+- <code>2 ≤ lebar_jalan_di_depan ≤ 80</code>
+- <code>2017 ≤ tahun_pengambilan_data ≤ 2025</code></p>
+<h3 id="output_1">Output</h3>
+<p>A cleaned subset of <code>df</code> with valid <code>hpm</code> and reasonable ranges.</p>
+<hr />
+<h2 id="3-crs-reprojection-for-metric-distance-calculations">3. CRS Reprojection for Metric Distance Calculations</h2>
+<h3 id="objective_2">Objective</h3>
+<p>Convert all spatial layers into a projected CRS so distance features are in meters.</p>
+<h3 id="crs-conversion">CRS Conversion</h3>
+<p><strong>All layers converted</strong>: EPSG:4326 → EPSG:32748</p>
+<p>Layers converted:
+- <code>df</code>
+- <code>road</code>
+- <code>main_road_jabodetabek</code>
+- <code>bc_new_gdf</code>
+- <code>sc_new_gdf</code>
+- <code>mark</code> and <code>rural</code></p>
+<p><strong>Reason</strong>: Distance in geographic CRS (lat/lon) is not in meters; projected CRS is required for correct Euclidean distance.</p>
+<hr />
+<h2 id="4-spatial-distance-feature-engineering">4. Spatial Distance Feature Engineering</h2>
+<h3 id="objective_3">Objective</h3>
+<p>Generate continuous proximity variables (in meters) to key spatial objects using spatial index nearest queries.</p>
+<h3 id="method">Method</h3>
+<p>Use spatial index (<code>sindex.nearest</code>) to compute nearest distance from each property point to:
+1. Big city centers (<code>bc_new_gdf</code>)
+2. Small city/activity centers (<code>sc_new_gdf</code>)
+3. Any road (<code>road</code>)
+4. Main roads only (<code>main_road_jabodetabek</code>)</p>
+<h3 id="features-created">Features Created</h3>
+<ul>
+<li><code>distance_to_big_city</code></li>
+<li><code>distance_to_small_city</code></li>
+<li><code>distance_to_road</code></li>
+<li><code>distance_to_main_road</code></li>
+</ul>
+<h3 id="output_2">Output</h3>
+<p><code>df</code> enriched with 4 continuous distance features.</p>
+<hr />
+<h2 id="5-spatial-zone-marking-binary-features">5. Spatial Zone Marking (Binary Features)</h2>
+<h3 id="objective_4">Objective</h3>
+<p>Add categorical/binary features indicating whether a property falls inside predefined strategic zones.</p>
+<h3 id="51-premium-zone-flags-polygon-intersection">5.1 Premium Zone Flags (Polygon Intersection)</h3>
+<p>Polygons sourced from <code>mark_4.geojson</code>, using marking labels.</p>
+<p><strong>Features created</strong>:</p>
+<h4 id="1-most-premium-core-areas">1. Most premium core areas</h4>
+<ul>
+<li><code>marking ∈ {menteng, kebayoran, pondok indah}</code></li>
+<li><strong>Feature</strong>: <code>is_the_most_premium</code> (0/1)</li>
+<li><strong>Logic</strong>: Point intersects polygon group</li>
+</ul>
+<h4 id="2-secondary-premium-areas-excluding-pik-group">2. Secondary premium areas (excluding PIK group)</h4>
+<ul>
+<li><code>marking ∈ {segara city, harapan indah, bsd, sgs, lippo karawaci}</code></li>
+<li><strong>Feature</strong>: <code>is_premium_area_2</code> (0/1)</li>
+</ul>
+<h4 id="3-pik-specific-flag">3. PIK specific flag</h4>
+<ul>
+<li><code>marking ∈ {pik, pik2}</code></li>
+<li><strong>Feature</strong>: <code>is_pantai_indah_kapuk</code> (0/1)</li>
+</ul>
+<h3 id="52-rural-flag-spatial-join-within">5.2 Rural Flag (Spatial Join "Within")</h3>
+<ul>
+<li>Remove <code>index_right</code> column (to avoid conflicts)</li>
+<li>Spatial join <code>df</code> with rural polygons and mark if point is inside rural polygon</li>
+<li><strong>Feature created</strong>: <code>is_rural</code> (0/1)</li>
+</ul>
+<h3 id="output_3">Output</h3>
+<p><code>df</code> enriched with zone-based binary indicators.</p>
+<hr />
+<h2 id="6-additional-data-cleaning-de-duplication">6. Additional Data Cleaning &amp; De-duplication</h2>
+<h3 id="objective_5">Objective</h3>
+<p>Remove incomplete labels, remove suspected wrong-coordinate records, and keep the most recent record per coordinate.</p>
+<h3 id="61-remove-missing-critical-fields">6.1 Remove Missing Critical Fields</h3>
+<p>Records are removed if any of these are missing:
+- <code>predicted_class</code>
+- <code>kondisi_wilayah_sekitar</code></p>
+<p><strong>Action</strong>: <code>dropna(subset=[...])</code></p>
+<h3 id="62-remove-wrong-coordinate-cluster-buffer-exclusion">6.2 Remove Wrong-Coordinate Cluster (Buffer Exclusion)</h3>
+<p><strong>Objective</strong>: Exclude points suspected to be in an incorrect location (GPS/data entry issue), defined by known coordinate anchors.</p>
+<p><strong>Process</strong>:
+1. Define suspicious coordinates:
+   - (106.8305723, -6.2184799)
+   - (106.8280988, -6.2184283)
+2. Convert to GeoDataFrame (EPSG:4326) → reproject to EPSG:32748
+3. Create 30-meter buffer around those points
+4. Remove any record where property point lies within buffer union</p>
+<h3 id="63-de-duplicate-by-latlong-keeping-newest-observation">6.3 De-duplicate by Lat/Long Keeping Newest Observation</h3>
+<p><strong>Objective</strong>: If multiple observations exist at the same location, keep the latest record.</p>
+<p><strong>Process</strong>:
+1. Sort descending by <code>tahun_pengambilan_data</code>
+2. Drop duplicates by <code>(latitude, longitude)</code>, keep first (newest)</p>
+<h3 id="output_4">Output</h3>
+<ul>
+<li>A filtered dataset excluding likely coordinate errors</li>
+<li>One row per coordinate pair (latest year retained)</li>
+</ul>
+<hr />
+<h2 id="7-accessibility-feature-engineering">7. Accessibility Feature Engineering</h2>
+<h3 id="objective_6">Objective</h3>
+<p>Create a binary indicator capturing whether a parcel is "accessible" from roads, considering parcel geometry proxy and road width; with a special rule for PIK.</p>
+<h3 id="71-shape-factor-definition-heuristic-geometry-adjustment">7.1 Shape Factor Definition (Heuristic Geometry Adjustment)</h3>
+<p>A lookup factor used to adjust estimated parcel side length depending on tapak shape (<code>bentuk_tapak</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>persegi</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>persegi panjang</td>
+<td>1.3</td>
+</tr>
+<tr>
+<td>trapesium</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>ngantong</td>
+<td>1.4</td>
+</tr>
+<tr>
+<td>letter l</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>tidak beraturan</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>kipas</td>
+<td>1.2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-numeric-coercion-and-normalization">7.2 Numeric Coercion and Normalization</h3>
+<p><strong>Objective</strong>: Ensure consistent numeric types and handle missing.</p>
+<p><strong>Conversions applied</strong>:
+- <code>luas_tanah</code>: numeric, invalid → NaN → clipped to ≥ 0
+- <code>distance_to_road</code>: numeric
+- <code>panjang_maks_kebelakang</code>: numeric, missing → 0
+- <code>lebar_frontage</code>: numeric, missing → 0
+- <code>lebar_jalan_di_depan</code>: numeric, missing → 0
+- <code>bentuk_tapak</code>: fill empty string, normalize to lowercase/strip</p>
+<h3 id="73-intermediate-geometry-proxy-features">7.3 Intermediate Geometry Proxy Features</h3>
+<p><strong>Features created</strong>:</p>
+<h4 id="sqrt_luas">sqrt_luas</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sqrt_luas = sqrt(luas_tanah)
+</code></pre></div>
+<h4 id="ratio_luas">ratio_luas</h4>
+<p>Compares land area vs rectangle approximation (panjang_maks_kebelakang × lebar_frontage):
+- If either side is 0 → inf
+- Else: <code>ratio = max(luas_tanah, p×l) / min(luas_tanah, p×l)</code></p>
+<h4 id="ratio_sisi">ratio_sisi</h4>
+<p>Aspect ratio of sides:
+- If min side is 0 → inf
+- Else: <code>ratio = max(panjang, lebar) / min(panjang, lebar)</code></p>
+<h3 id="74-compute-sisi-effective-side-length">7.4 Compute "Sisi" (Effective Side Length)</h3>
+<p><strong>Feature created</strong>: <code>sisi</code></p>
+<p><strong>Method</strong>: <code>compute_sisi(row)</code> uses:
+- <code>bentuk_tapak</code>
+- <code>sqrt_luas</code>
+- <code>panjang_maks_kebelakang</code>, <code>lebar_frontage</code>
+- <code>ratio_luas</code>, <code>ratio_sisi</code></p>
+<p><strong>Heuristic rule summary</strong>:</p>
+<p>If panjang or lebar missing (0):
+- If <code>persegi</code> → <code>sqrt_luas</code>
+- Else → <code>sqrt_luas × shape_factor(bentuk) × 2</code></p>
+<p>If sides exist:
+- If <code>ratio_luas ≤ 1.5</code>:
+  - If <code>persegi</code> and <code>ratio_sisi ≤ 1.5</code> → <code>sqrt_luas</code>
+  - Else → <code>panjang</code>
+  - If non-persegi → <code>panjang</code>
+- If <code>ratio_luas &gt; 1.5</code>:
+  - If <code>persegi</code> → <code>sqrt_luas</code>
+  - Else → <code>sqrt_luas × shape_factor(bentuk) × 2</code></p>
+<h3 id="75-accessibility-decision-variables">7.5 Accessibility Decision Variables</h3>
+<p><strong>Features created</strong>:</p>
+<h4 id="jarak_sisi">jarak_sisi</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>jarak_sisi = sisi + 0.5 × lebar_jalan_di_depan
+</code></pre></div>
+<h4 id="is_accessible-01">is_accessible (0/1)</h4>
+<p><strong>Accessibility rule</strong>:</p>
+<p>A record is accessible if:
+- <code>distance_to_road ≤ jarak_sisi</code>, OR
+- <code>is_pantai_indah_kapuk == 1</code> (PIK override)</p>
+<p>Therefore:
+- <code>is_accessible = 1</code> if either condition true, else 0</p>
+<hr />
+<h2 id="8-land-use-area-reclassification-logic">8. Land-use / Area Reclassification Logic</h2>
+<h3 id="objective_7">Objective</h3>
+<p>Harmonize/clean land-use labels and generate a numeric land-use class used downstream.</p>
+<h3 id="81-reclassify-kondisi_wilayah_sekitar-into-standard-groups">8.1 Reclassify "kondisi_wilayah_sekitar" into Standard Groups</h3>
+<p><strong>Feature created</strong>: <code>kondisi_wilayah_sekitar_reclass</code></p>
+<p><strong>Mapping groups</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Source Categories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hijau</td>
+<td>Hijau, Kosong Pertanian</td>
+</tr>
+<tr>
+<td>Perumahan</td>
+<td>Perumahan, Perumahan Sederhana, Menengah, Mewah</td>
+</tr>
+<tr>
+<td>Komersial</td>
+<td>Komersial, Pemerintahan, Komersial Menengah/UKM/Primer</td>
+</tr>
+<tr>
+<td>Campuran</td>
+<td>Campuran</td>
+</tr>
+<tr>
+<td>Industri</td>
+<td>Industri, Industri/Perdagangan…, Industri/Pergudangan Besar</td>
+</tr>
+<tr>
+<td>Lainnya</td>
+<td>Lainnya, Dekat Sungai/Parit, Rawan Bencana, Dekat TPU</td>
+</tr>
+</tbody>
+</table>
+<p>Anything else → "Lainnya"</p>
+<h3 id="82-filter-invalid-empty-prediction-label">8.2 Filter Invalid Empty Prediction Label</h3>
+<p><strong>Action</strong>: Remove rows where <code>prediction_class == ""</code></p>
+<h3 id="83-commercial-influence-zone-derived-from-road-width">8.3 Commercial Influence Zone (Derived from Road Width)</h3>
+<p><strong>Features created</strong>:</p>
+<h4 id="rad_komersial">rad_komersial</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rad_komersial = lebar_jalan_di_depan × 2.5
+</code></pre></div>
+<h4 id="area_komersial-01">area_komersial (0/1)</h4>
+<p><strong>Rule</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>area_komersial = 1 if:
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  - distance_to_main_road &lt; rad_komersial AND
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  - kondisi_wilayah_sekitar_reclass == &quot;komersial&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Else 0.
+</code></pre></div></p>
+<h3 id="84-final-rule-based-reclassification-multi-source-reconciliation">8.4 Final Rule-based Reclassification (Multi-source Reconciliation)</h3>
+<p><strong>Features created</strong>:
+- <code>reclassify</code> (string)
+- <code>reclassify_num</code> (integer code)</p>
+<p><strong>Inputs used per row</strong>:
+- <code>kondisi_wilayah_sekitar_reclass</code> (context label)
+- <code>predicted_class</code> (AGGA / your baseline class)
+- <code>prediction_class</code> (model predicted class)
+- <code>area_komersial</code> (commercial override indicator)</p>
+<p><strong>Normalization</strong>:
+- Convert "Green" → "Hijau" (for both AGGA and model labels)</p>
+<p><strong>Core decision logic</strong> (high-level):
+- If context is <strong>Campuran/Lainnya/empty</strong> → use AGGA (<code>predicted_class</code>)
+- If context is <strong>Industri</strong>:
+  - Allow predicted to stay (Industri/Komersial)
+  - If predicted Perumahan → revert to AGGA
+  - If predicted Hijau → force Industri
+- If context is <strong>Hijau</strong>:
+  - If predicted Industri/Komersial → force Hijau
+  - If predicted Hijau → keep
+  - If predicted Perumahan → revert to AGGA
+- If context is <strong>Perumahan</strong> → always AGGA
+- If context is <strong>Komersial</strong>:
+  - If <code>area_komersial == 1</code> → force Komersial
+  - Else if <code>area_komersial == 0</code>:
+    - If AGGA ≠ Hijau → AGGA
+    - If AGGA == Hijau → Komersial</p>
+<p><strong>Post-process</strong>:
+- Lowercase <code>reclassify</code>, replace "green" → "hijau"</p>
+<h3 id="85-encode-to-numeric-land-use-class">8.5 Encode to Numeric Land-use Class</h3>
+<p><strong>Mapping</strong> (<code>rn_mapping</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Land-use</th>
+<th>Numeric Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hijau</td>
+<td>1</td>
+</tr>
+<tr>
+<td>slum+slum-to-normal</td>
+<td>2</td>
+</tr>
+<tr>
+<td>normal+normal-premium</td>
+<td>3</td>
+</tr>
+<tr>
+<td>premium</td>
+<td>4</td>
+</tr>
+<tr>
+<td>industri</td>
+<td>5</td>
+</tr>
+<tr>
+<td>komersial</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Feature created</strong>: <code>reclassify_num = rn_mapping[reclassify]</code></p>
+<p><strong>Final cleaning</strong>:
+- Remove rows where <code>reclassify_num</code> is invalid/zero-like
+- Drop rows where <code>reclassify</code> is missing</p>
+<hr />
+<h2 id="9-parcel-position-scoring-feature">9. Parcel Position Scoring Feature</h2>
+<h3 id="objective_8">Objective</h3>
+<p>Convert categorical <code>posisi_tapak</code> (site position) into a numeric score that differs by land-use class.</p>
+<h3 id="91-define-scoring-rules-by-class">9.1 Define Scoring Rules by Class</h3>
+<p>A nested scoring dictionary assigns <code>posisi_tapak</code> → score depending on <code>reclassify</code> category:</p>
+<p><strong>Classes covered explicitly</strong>:
+- <code>premium</code>
+- <code>slum+slum-to-normal</code>
+- <code>komersial</code>
+- <code>hijau</code></p>
+<p><strong>Extended by inheritance</strong>:
+- <code>industri</code> uses the same scoring as <code>komersial</code>
+- <code>normal+normal-premium</code> uses the same scoring as <code>slum+slum-to-normal</code></p>
+<h3 id="92-apply-to-dataframe">9.2 Apply to Dataframe</h3>
+<p><strong>Feature created</strong>: <code>score_posisi</code></p>
+<p><strong>Method</strong>:
+1. Normalize keys:
+   - <code>reclassify</code> → lower()
+   - <code>posisi_tapak</code> → title()
+2. Lookup score in the dictionary
+3. If not found → NaN</p>
+<h3 id="output_5">Output</h3>
+<p><code>df['score_posisi']</code> is a numeric ordinal feature representing location advantage/disadvantage based on land-use context.</p>
+<hr />
+<h2 id="10-ownership-certificate-adjustment-feature">10. Ownership / Certificate Adjustment Feature</h2>
+<h3 id="objective_9">Objective</h3>
+<p>Adjust <code>hpm</code> into <code>hpm_sertifikat</code> to reflect price impacts due to different land title types (<code>kepemilikan</code>), with different direction by land-use group.</p>
+<h3 id="101-normalize-text-labels">10.1 Normalize Text Labels</h3>
+<p>Temporary normalized fields:
+- <code>reclassify_norm = reclassify.strip().lower()</code>
+- <code>kepemilikan_norm = kepemilikan.strip().lower()</code></p>
+<h3 id="102-create-adjusted-price-metric">10.2 Create Adjusted Price Metric</h3>
+<p><strong>Feature created</strong>: <code>hpm_sertifikat</code></p>
+<p><strong>Initialization</strong>: <code>hpm_sertifikat = hpm</code> (base)</p>
+<h3 id="103-define-land-use-groups">10.3 Define Land-use Groups</h3>
+<p><strong>Category A</strong> (residential-like / premium spectrum):
+- <code>slum+slum-to-normal</code>, <code>normal+normal-premium</code>, <code>premium</code></p>
+<p><strong>Category B</strong> (commercial/industry/green spectrum):
+- <code>komersial</code>, <code>hijau</code>, <code>industri</code></p>
+<h3 id="104-define-ownership-groups">10.4 Define Ownership Groups</h3>
+<p><strong>HM group</strong>:
+- hak milik (hm)</p>
+<p><strong>HP/HPL/HGU group</strong>:
+- hak pakai (hp), hak pengelolaan (hpl), hak guna usaha (hgu)</p>
+<p><strong>HGB group</strong> (no adjustment):
+- hak guna bangunan (hgb), hgb diatas hpl</p>
+<h3 id="105-apply-rule-based-multipliers">10.5 Apply Rule-based Multipliers</h3>
+<p><strong>Adjustments applied</strong> for rows in Category A or B:</p>
+<ol>
+<li><strong>HM + Category A</strong> → 0.995</li>
+<li>
+<p><code>hpm_sertifikat = hpm × 0.995</code></p>
+</li>
+<li>
+<p><strong>HM + Category B</strong> → 1.005</p>
+</li>
+<li>
+<p><code>hpm_sertifikat = hpm × 1.005</code></p>
+</li>
+<li>
+<p><strong>HP/HPL/HGU</strong> (any category) → 1.005</p>
+</li>
+<li>
+<p><code>hpm_sertifikat = hpm × 1.005</code></p>
+</li>
+<li>
+<p><strong>Other ownership types</strong> (excluding HM, HP/HPL/HGU, HGB) → 1.01</p>
+</li>
+<li>
+<p><code>hpm_sertifikat = hpm × 1.01</code></p>
+</li>
+<li>
+<p><strong>HGB rows</strong></p>
+</li>
+<li>Not matched in masks → remain <code>hpm_sertifikat = hpm</code></li>
+</ol>
+<h3 id="output_6">Output</h3>
+<p><code>hpm_sertifikat</code> is an engineered "ownership-adjusted" price per meter feature.</p>
+<hr />
+<h2 id="11-parcel-shape-scoring-feature">11. Parcel Shape Scoring Feature</h2>
+<h3 id="objective_10">Objective</h3>
+<p>Transform categorical parcel shape (<code>bentuk_tapak</code>) into a numeric score that depends on land-use class and parcel size.</p>
+<h3 id="111-scoring-matrix-by-land-use-and-size-bucket">11.1 Scoring Matrix by Land-use and Size Bucket</h3>
+<p>A nested <code>scoring_map</code> defines:</p>
+<p><strong>Structure</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>reclassify class (e.g., premium / komersial / hijau / industri, etc.)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  → bentuk_tapak category (Persegi, Persegi Panjang, Trapesium, Ngantong, Letter L, Kipas, Tidak Beraturan)
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    → size bucket score
+</code></pre></div></p>
+<p><strong>Size buckets</strong>:
+- <code>&lt;500</code> (luas_tanah &lt; 500)
+- <code>500-10000</code> (500 ≤ luas_tanah ≤ 10000)
+- <code>&gt;10000</code> (luas_tanah &gt; 10000)</p>
+<h3 id="112-scoring-function">11.2 Scoring Function</h3>
+<p><strong>Function</strong>: <code>score_bentuk(row)</code></p>
+<p><strong>Steps</strong>:
+1. Normalize:
+   - <code>reclassify</code> → lower().strip()
+   - <code>bentuk_tapak</code> → title().strip()
+2. Determine <code>size_key</code> from <code>luas_tanah</code>
+3. Lookup score in <code>scoring_map</code>
+4. If <code>luas_tanah</code> missing or key not found → return NaN</p>
+<h3 id="113-apply-to-dataframe">11.3 Apply to Dataframe</h3>
+<p><strong>Feature created</strong>: <code>score_bentuk</code></p>
+<h3 id="output_7">Output</h3>
+<p><code>score_bentuk</code> provides a numeric proxy for parcel efficiency/market preference based on shape, conditioned on land-use + parcel size.</p>
+<hr />
+<h2 id="12-economic-index-feature-pdrb-adhb-normalization">12. Economic Index Feature (PDRB ADHB Normalization)</h2>
+<h3 id="objective_11">Objective</h3>
+<p>Attach a macro-economic growth proxy to each observation based on city (<code>wadmkk</code>) and year (<code>tahun_pengambilan_data</code>).</p>
+<h3 id="121-build-pdrb-index-base-year-2010">12.1 Build PDRB Index (Base Year = 2010)</h3>
+<p><strong>Input</strong>: <code>pdrb_adhb</code> table with column <code>Tahun</code> + city columns.</p>
+<p><strong>Method</strong>:</p>
+<p>Choose base year: <strong>2010</strong></p>
+<p>For each city column (all columns except <code>Tahun</code>):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>index_city = (PDRB_city_year / PDRB_city_2010) × 100
+</code></pre></div></p>
+<p><strong>Output</strong>: New columns added to <code>pdrb_adhb</code>: <code>index_&lt;city&gt;</code> (base=100 at year 2010)</p>
+<h3 id="122-map-city-label-to-correct-index-column">12.2 Map City Label to Correct Index Column</h3>
+<p>A mapping dictionary translates <code>wadmkk</code> names into the matching index column:</p>
+<p><strong>Examples</strong>:
+- "Kota Administrasi Jakarta Selatan" → "index_Jakarta Selatan"
+- "Kota Depok" → "index_Kota Depok"
+- etc.</p>
+<h3 id="123-assign-index-to-each-row">12.3 Assign Index to Each Row</h3>
+<p><strong>Feature created</strong>: <code>index_pdrb_adhb</code></p>
+<p><strong>Method</strong>:</p>
+<p>For each record:
+1. Locate <code>city = wadmkk</code>
+2. Locate <code>year = tahun_pengambilan_data</code>
+3. Fetch corresponding <code>pdrb_adhb[index_city]</code> for that year
+4. If no match → None</p>
+<h3 id="output_8">Output</h3>
+<p><code>df['index_pdrb_adhb']</code> as a numeric macro index per observation.</p>
+<hr />
+<h2 id="13-log-transform-features">13. Log Transform Features</h2>
+<h3 id="objective_12">Objective</h3>
+<p>Reduce skewness and stabilize variance for distance and scale variables (common for pricing models).</p>
+<h3 id="131-log-transform-distance-features">13.1 Log-transform Distance Features</h3>
+<p><strong>Selection rule</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">distance_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;distance&quot;</span><span class="p">)]</span>
+</code></pre></div></p>
+<p><strong>Features created</strong> (for each distance column):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ln_&lt;distance_col&gt; = log1p(distance_col)
+</code></pre></div></p>
+<p><strong>Note</strong>: <code>log1p(x)</code> is used to handle zero distances safely.</p>
+<h3 id="132-log-transform-core-continuous-variables">13.2 Log-transform Core Continuous Variables</h3>
+<p><strong>Features created</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ln_hpm_sertifikat = log(hpm_sertifikat)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ln_luas_tanah = log(luas_tanah)
+</code></pre></div></p>
+<h3 id="output_9">Output</h3>
+<p>Log-scale versions of the main price metric and land area.</p>
+<hr />
+<h2 id="14-outlier-removal">14. Outlier Removal</h2>
+<h3 id="objective_13">Objective</h3>
+<p>Remove extreme observations using a two-stage strategy:
+1. Manual ID exclusion list
+2. District-class quantile filtering</p>
+<h3 id="141-manual-outlier-exclusion-by-object-id">14.1 Manual Outlier Exclusion by Object ID</h3>
+<p><strong>Input</strong>: <code>ids_to_drop</code> list</p>
+<p><strong>Action</strong>: Remove rows where <code>id</code> is in <code>ids_to_drop</code></p>
+<h3 id="142-checkpoint-dataset-creation">14.2 Checkpoint Dataset Creation</h3>
+<p><strong>Action</strong>: <code>df_checkpoint = df.copy()</code></p>
+<h3 id="143-define-grouping-key-district-class">14.3 Define Grouping Key (District × Class)</h3>
+<p><strong>Features created</strong> (helper):</p>
+<h4 id="wadmkd_agga_score_hyb">wadmkd_agga_score_hyb</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>wadmkd_agga_score_hyb = str(reclassify_num) + wadmkd
+</code></pre></div>
+This acts as a group identifier for "district + land-use class"</p>
+<h4 id="object_id_hyb">object_id_hyb</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>object_id_hyb = id
+</code></pre></div>
+<h3 id="144-quantile-fence-filtering-within-each-group">14.4 Quantile Fence Filtering Within Each Group</h3>
+<p><strong>Method</strong>:</p>
+<p>For each unique <code>wadmkd_agga_score_hyb</code> group:
+1. Use <code>district_price = ln_hpm_sertifikat</code>
+2. Define fences:
+   - <code>lower_fence = quantile(district_price, 0.05)</code>
+   - <code>upper_fence = quantile(district_price, 0.95)</code>
+3. Flag outliers if:
+   - <code>ln_hpm_sertifikat &lt; lower_fence OR &gt; upper_fence</code></p>
+<p><strong>Stored outputs</strong> (auditability):</p>
+<p>Dictionaries for borders:
+- <code>up_value[group] = upper_fence</code>
+- <code>lower_value[group] = lower_fence</code></p>
+<p>Outlier list:
+- <code>is_outlier_hyb</code> stores IDs outside the fences</p>
+<h3 id="145-annotate-and-remove-outliers">14.5 Annotate and Remove Outliers</h3>
+<p><strong>Features created</strong> (diagnostic):
+- <code>upper_border</code> (per row)
+- <code>lower_border</code> (per row)
+- <code>is_outlier_hyb</code> (0/1)</p>
+<p><strong>Action</strong>: Keep only rows where <code>is_outlier_hyb == 0</code></p>
+<h3 id="output_10">Output</h3>
+<p>A cleaned dataset with district-class-adjusted trimming (5–95% band).</p>
+<hr />
+<h2 id="15-final-feature-generation-for-modeling">15. Final Feature Generation for Modeling</h2>
+<h3 id="objective_14">Objective</h3>
+<p>Produce final engineered predictors used directly in the ML model.</p>
+<h3 id="151-accessibility-adjusted-road-width">15.1 Accessibility-adjusted Road Width</h3>
+<p><strong>Feature created</strong>: <code>lebar_jalan_new</code></p>
+<p><strong>Rule</strong>:
+- If <code>is_accessible == 0</code> → <code>lebar_jalan_new = 0</code>
+- Else → <code>lebar_jalan_new = lebar_jalan_di_depan</code></p>
+<p>This encodes "road width only matters when accessible."</p>
+<h3 id="152-city-dummy-variables-jakarta-admin-bekasi-city">15.2 City Dummy Variables (Jakarta Admin + Bekasi City)</h3>
+<p><strong>Binary features created</strong>:
+- <code>is_jakarta_selatan</code>
+- <code>is_jakarta_pusat</code>
+- <code>is_jakarta_barat</code>
+- <code>is_jakarta_utara</code>
+- <code>is_jakarta_timur</code>
+- <code>is_bekasi_kota</code></p>
+<p><strong>Rule</strong>: 1 if <code>wadmkk</code> equals the respective city string (case-insensitive), else 0.</p>
+<h3 id="153-normalize-reclass-labels-into-short-codes">15.3 Normalize Reclass Labels into Short Codes</h3>
+<p><strong>Feature created</strong>: <code>reclassify_nn</code></p>
+<p><strong>Mapping</strong>:
+- <code>slum+slum-to-normal</code> → <code>sstn</code>
+- <code>normal+normal-premium</code> → <code>nnp</code>
+- Others remain as-is but normalized: strip + lowercase</p>
+<h3 id="154-one-hot-style-land-use-flags">15.4 One-hot Style Land-use Flags</h3>
+<p><strong>Binary features created</strong>:
+- <code>is_premium</code>
+- <code>is_industri</code>
+- <code>is_komersial</code>
+- <code>is_hijau</code>
+- <code>is_sstn</code>
+- <code>is_nnp</code></p>
+<p><strong>Rule</strong>: Compare <code>reclassify_nn</code> to each target code.</p>
+<h3 id="155-commercial-area-split-jakarta-vs-non-jakarta">15.5 Commercial Area Split: Jakarta vs Non-Jakarta</h3>
+<p><strong>Binary features created</strong>:</p>
+<h4 id="is_komersial_jakarta">is_komersial_jakarta</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>= 1 if (reclassify_nn == &#39;komersial&#39; AND wadmpr == &#39;DKI Jakarta&#39;)
+</code></pre></div>
+<h4 id="is_komersial_non_jakarta">is_komersial_non_jakarta</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>= 1 if (reclassify_nn == &#39;komersial&#39; AND wadmpr != &#39;DKI Jakarta&#39;)
+</code></pre></div>
+<hr />
+<h2 id="final-deliverable-of-feature-engineering-stage">Final Deliverable of Feature Engineering Stage</h2>
+<p>At the end of the pipeline, your modeling table includes:</p>
+<h3 id="macro-feature">Macro Feature</h3>
+<ul>
+<li><code>index_pdrb_adhb</code></li>
+</ul>
+<h3 id="transforms">Transforms</h3>
+<ul>
+<li><code>ln_distance_*</code> (for all distance columns)</li>
+<li><code>ln_hpm_sertifikat</code></li>
+<li><code>ln_luas_tanah</code></li>
+</ul>
+<h3 id="outlier-control-outputs-optional-diagnostics">Outlier Control Outputs (Optional Diagnostics)</h3>
+<ul>
+<li><code>upper_border</code></li>
+<li><code>lower_border</code></li>
+<li><code>is_outlier_hyb</code> (used to filter)</li>
+</ul>
+<h3 id="model-ready-engineered-predictors">Model-ready Engineered Predictors</h3>
+<p><strong>Road accessibility</strong>:
+- <code>lebar_jalan_new</code></p>
+<p><strong>City dummies</strong>:
+- <code>is_jakarta_*</code>
+- <code>is_bekasi_kota</code></p>
+<p><strong>Land-use flags</strong>:
+- <code>is_premium</code>
+- <code>is_industri</code>
+- <code>is_komersial</code>
+- <code>is_hijau</code>
+- <code>is_sstn</code>
+- <code>is_nnp</code></p>
+<p><strong>Commercial split</strong>:
+- <code>is_komersial_jakarta</code>
+- <code>is_komersial_non_jakarta</code></p>
+<hr />
+<p><a href="README.md">← Back to README</a> | <a href="FEATURES.md">Features →</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/yourusername/GOVAL" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
