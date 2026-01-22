@@ -1,0 +1,8 @@
+.DS_Store
+**/.DS_Store
+*.ipynb
+.ipynb_checkpoints/
+
+# MkDocs
+site/
+.cache/
