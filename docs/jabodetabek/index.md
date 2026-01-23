@@ -149,11 +149,11 @@ This feature engineering pipeline supports:
 
 ## License
 
-[Add your license information here]
+-
 
 ## Contact
 
-[Add contact information here]
+edwardokrisnasembiring@mail.ugm.ac.id
 
 ---
 
