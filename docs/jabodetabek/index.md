@@ -17,7 +17,7 @@ This repository contains the feature engineering pipeline and documentation for 
 
 This documentation is organized into the following files:
 
-### 📘 [Workflow Documentation](WORKFLOW.md)
+### 📘 [Workflow Documentation](workflow.md)
 Complete step-by-step feature engineering pipeline covering:
 - Data loading and spatial setup
 - Preprocessing and data cleaning
@@ -28,21 +28,21 @@ Complete step-by-step feature engineering pipeline covering:
 - Scoring features (position, shape, ownership)
 - Outlier removal strategies
 
-### 📊 [Feature Dependencies](FEATURES.md)
+### 📊 [Feature Dependencies](features.md)
 Comprehensive mapping of all final features including:
 - Feature dependency chains
 - Source column requirements
 - Computation paths
 - Complete dependency graph
 
-### 📦 [Data Requirements](DATA_REQUIREMENTS.md)
+### 📦 [Data Requirements](data-requirements.md)
 Detailed specification of all required data including:
 - Source data schema (20 required columns)
 - External geospatial data files
 - Macro-economic data requirements
 - Data quality expectations
 
-### ⚡ [Quick Reference](QUICK_REFERENCE.md)
+### ⚡ [Quick Reference](quick-reference.md)
 At-a-glance reference for:
 - Final feature list (42 features)
 - Feature categories and types
@@ -158,4 +158,4 @@ This feature engineering pipeline supports:
 ---
 
 **Navigation**:
-[Workflow](WORKFLOW.md) | [Features](FEATURES.md) | [Data Requirements](DATA_REQUIREMENTS.md) | [Quick Reference](QUICK_REFERENCE.md)
+[Workflow](workflow.md) | [Features](features.md) | [Data Requirements](data-requirements.md) | [Quick Reference](quick-reference.md)
